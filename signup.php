@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-    <title>Sign Up</title>
+    <title>Sign Up here</title>
 
     <!-- Main css -->
     <link rel="stylesheet" href="css/signup.css">
