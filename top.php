@@ -37,7 +37,7 @@ border: none;
 <div class ="topnav">
 <img id="logo" src ="v10_163.png">
 <a href= "home.php"> Home </a>
-<a href= "shop.php"> Shop </a>
+<a href= "Cart.php"> Shop </a>
 <a href= "Contact Us.php"> Contact us </a>
 <span class = "searchbar">
       <input type="text" placeholder="Search.." name="search" id = "search">
