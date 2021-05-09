@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet" />
-	<link href="./css/main.css" rel="stylesheet" />
-	<title>Contact us</title>
-	<?php
-	include "top.php"
-	?>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet" />
+  <link href="./css/main.css" rel="stylesheet" />
+  <title>Contact us</title>
+  <?php include "top.php";?>
+
 </head>
 <style>
 
@@ -36,8 +35,8 @@ font-weight: 400;
 
 
 }
-input[type=text],select, textarea,label{
-	position: relative;
+#name, #message, #subject  input[type=text],select, textarea,label{
+  position: relative;
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -49,7 +48,7 @@ border-radius: 40px;
 font-family:Roboto
 }
 input[type=submit] {
-	position: absolute;
+  position: absolute;
    background-color:#BF7154;
   color: white;
   width: 200px;
@@ -84,48 +83,12 @@ background: #BF7154;
 border-radius: 83px;
 }
 
-.layernav{
-position: relative;
-width: 1510px;
-height: 170px;
-left:0px;
-top:-1420px;
-background:#FFF9F2;
-border-radius: 83px;
-}
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #FFF9F2;
-}
-li {
-  float: left;
-}
-li a {
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-family: Roboto;
-font-size: 23px;
-font-style: normal;
-font-weight: 200;
-line-height: 27px;
-letter-spacing: 0px;
-
-}
-li a:hover:not(.active) {
-  background-color:#BF7154 ;
-}
 
 </style>
 <body>
-	<div class="form">
-		<h1>Contact Us</h1>
+  <div class="form">
+    <h1>Contact Us</h1>
         <label for="name" style="font-weight: bold;"> Name</label>
     <input type="text" id="name" name="name" placeholder="Your name..">
    <br>
@@ -138,16 +101,4 @@ li a:hover:not(.active) {
 
    <div class="layer">
    </div>
-<!--
-   <div class ="layernav">
-
-   	<ul>
-      
-  <li><a href="#home">Home</a></li>
-  <li><a href="#Shop">Shop</a></li>
-  <li><a href="#contact">Contact Us</a></li>
-
-</ul>
---->
-</div>
-
+    
