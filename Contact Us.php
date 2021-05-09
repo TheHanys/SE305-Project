@@ -142,9 +142,12 @@ li a:hover:not(.active) {
    <div class ="layernav">
 
    	<ul>
+      <!---
   <li><a href="#home">Home</a></li>
   <li><a href="#Shop">Shop</a></li>
   <li><a href="#contact">Contact Us</a></li>
 
 </ul>
+--->
 </div>
+
