@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
@@ -6,6 +6,9 @@
 	<link href="./css/main.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<title>Cart</title>
+	<?php
+	include "top.php"
+	?>
 </head>
 <style>
 	.layer{
@@ -141,11 +144,9 @@ z-index: 6;
    	<p style="font-family:Rozha One" >&nbsp;Calvin Klein One</p>
 
   <p style="font-family: Roboto"> &nbsp; 500EGP</p>
-   		
+
 
    </div>
 <input type="submit" value="Check Out">
 <div class="layer3">
 	<p>Total:900EGP</p>
-
-   

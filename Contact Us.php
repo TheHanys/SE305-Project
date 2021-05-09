@@ -5,6 +5,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet" />
 	<link href="./css/main.css" rel="stylesheet" />
 	<title>Contact us</title>
+	<?php
+	include "top.php"
+	?>
 </head>
 <style>
 
