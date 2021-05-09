@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-    <title>Sign Up here</title>
-
-    <!-- Main css -->
+    <title>Sign Up</title>
     <link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
@@ -21,7 +19,7 @@
                     <form method="POST" id="signup-form" class="signup-form" action="">
                         <h2 id="create" class="form-title">Create account</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="username" id="username" placeholder="Your Name"/>
+                            <input type="text" class="form-input" name="username" id="username" placeholder="Your Username"/>
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
@@ -35,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <input type="checkbox" checked="checked" name="agree-term" id="agree-term" class="agree-term" />
-                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="https://www.termsfeed.com/live/471266b5-2f7c-469c-93be-84f39705d98f" class="term-service">Terms of service</a></label>
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>By signing up, you agree to all statements in  <a href="https://www.termsfeed.com/live/471266b5-2f7c-469c-93be-84f39705d98f" class="term-service">Terms of service</a></label>
                         </div>
                         <div class="form-group">
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
@@ -49,8 +47,6 @@
         </section>
 
     </div>
-
-    <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body>

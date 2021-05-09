@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Sign In here</title>
-
-
-    <!-- css -->
+    <title>Sign In</title>
     <link rel="stylesheet" href="css/signin.css">
 </head>
 <body>
@@ -75,7 +72,7 @@ if(isset($_POST["submit"]))
         $_SESSION["email"]=$row["Email"];
         $_SESSION["password"]=$row["password"];
         $_SESSION["phonenumber"]=$row["phonenumber"];
-        header("Location:signup.php");
+        header("Location:home.php");
     }
     else    
     {

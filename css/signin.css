@@ -4,7 +4,7 @@ display-flex, .display-flex, .display-flex-center {
 
 list-type-ulli {
   list-style-type: none;
-  margin: 00;
+  margin: 0;
   padding: 0; }
 
 
@@ -125,7 +125,7 @@ body {
   color: white;
   font-weight: 400;
   font-family: 'Montserrat';
-  background-image: url("../images/v28_6.png");
+  background-image: url("../images/v28_7.png");
   background-repeat: no-repeat;
   background-size: cover;
   -moz-background-size: cover;
