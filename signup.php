@@ -40,7 +40,7 @@
                         </div>
                     </form>
                     <p class="loginhere">
-                        Already have an account ? <a href="http://localhost/signin.php" class="loginhere-link">Login here</a>
+                        Already have an account? <a href="http://localhost/signin.php" class="loginhere-link">Login here</a>
 
                 </div>
             </div>
