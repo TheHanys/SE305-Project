@@ -6,7 +6,15 @@ abstract class User
   public $conn;
   function create_connection(){
       $this->conn = new mysqli("localhost", "root", "", "stars");
-  }
+}
+
+abstract class products
+{
+  public $name , $price, $image;
+  public $conn;
+  function create_connection(){
+      $this->conn = new mysqli("localhost", "root", "", "stars");
+}
 
 }
 class admin extends User
@@ -69,5 +77,24 @@ class client extends user
       $result=mysqli_query($this->conn,$sql);
       return $result;
     }
+
+
+    function addtocart ($name)
+    {
+    	$this->create_connection();
+      $sql="SELECT * from products where name='$name'";
+      $result=mysqli_query($this->conn,$sql);
+      return $result;
+    }
 }
+
+
+
+
+
+
+
+
+
+
 
