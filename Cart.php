@@ -5,7 +5,7 @@
   <link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet" />
   <link href="./css/main.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <title>Cart</title>
+  <title>Shooping Cart</title>
   <?php
   include "top.php"
   ?>
