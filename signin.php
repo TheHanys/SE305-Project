@@ -45,7 +45,7 @@
       $("#phonenumber").keypress(function(e) {
       if (String.fromCharCode(e.which).match(/[^0-9_ ]/)) {
         e.preventDefault();
-        alert(" You can't enter an alphabet in this field , Use '0-9'.");
+        alert(" You can't enter an alphabet in this field, Use '0-9'.");
        }
      });
    
