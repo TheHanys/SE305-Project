@@ -87,7 +87,7 @@ $servername = "localhost";
                      <img src=<?php echo ($Image); ?>  >
                      <h5> Name : <?php echo ($Name)?> </h5>
                       <h5> Price : <?php echo ($Price)?> EGP </h5>
-                      <div class="cart-action"><input type="text" class="product-quantity" name="quantity" value="1" size="4" /><input type="submit"  value="Add to Cart"  class="btnAddAction" /></div>
+                      <div class="cart-action"><input type="text" class="product-quantity" name="quantity" value="1" size="4" />  <a href="cart.php" input type="submit"  value="Add to Cart" class="btnAddAction" >Add to Cart</a></label> </div>
                   </form>
                      </div>
              
