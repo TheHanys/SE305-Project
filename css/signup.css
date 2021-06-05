@@ -77,20 +77,22 @@ h2 {
   color: white;
   font-family: 'Montserrat';
   font-size: 24px;
-  text-transform: uppercase;
   text-align: center;
-  margin-bottom: 40px; }
+  margin-bottom: 40px; 
+  
+}
 
-
-
-  h5 {
-    position: relative;
-    left: 500px;
-    top: 50px;
-  }
-
-.clear {
-  clear: both; }
+.incorrect{
+  border: 1px;
+  width:400px;
+  position:relative;
+  left:580px;
+  bottom:150px;
+  border-radius:5px;
+  color: #9F6000;
+  background-color: #FEEFB3;
+  opacity: 0.8;
+}
 
 
 body {
@@ -107,7 +109,7 @@ body {
   -o-background-size: cover;
   -ms-background-size: cover;
   background-position: center center;
-  padding: 114px 0; }
+  padding: 115px 0; }
 
 .container {
   width: 660px;
