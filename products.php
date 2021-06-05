@@ -62,32 +62,32 @@ img{
 </div>
 
 <?php
-$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "stars";
-            
-    $conn = mysqli_connect($servername,$username,$password,$dbname);
-    $sql="SELECT * from products";
-       $result = mysqli_query($conn,$sql);	
+ob_start();
+include "classes.php";
+session_start();
+
+
+$_SESSION['products']=new products();
+$_SESSION['orders']=new orders();
+$result =$_SESSION['products']->viewproducts();
   
-	while($row=mysqli_fetch_array($result))	
-	{
-           
-              $ID=$row[0];
-              $Name=$row[1];
-              $Price=$row[2];
-              $Image=$row[3];
-    ?>
+while($row=mysqli_fetch_array($result)) 
+{
+       
+          $_SESSION['products']->id=$row[0];
+          $_SESSION['products']->name=$row[1];
+          $_SESSION['products']->price=$row[2];
+          $_SESSION['products']->image=$row[3];
+?>
 
        <div class="container" >  
        	<div class ="row">
        		<div class ="col-md-4" style="border-right-style: inset; border-color:#BF7154;">
        			<form method="post">
-                     <img src=<?php echo ($Image); ?>  >
-                     <h5> Name : <?php echo ($Name)?> </h5>
-                      <h5> Price : <?php echo ($Price)?> EGP </h5>
-                      <div class="cart-action"><input type="text" class="product-quantity" name="quantity" value="1" size="4" />  <a href="cart.php" input type="submit"  value="Add to Cart" class="btnAddAction" >Add to Cart</a></label> </div>
+                     <img src=<?php echo ($_SESSION['products']->image) ?>  >
+                     <h5> Name : <?php echo ($_SESSION['products']->name)?> </h5>
+                      <h5> Price : <?php echo ($_SESSION['products']->price)?> EGP </h5>
+                      <div class="cart-action"><input type="text" class="product-quantity" name="quantity" value="1" size="4" />   <span><input type="submit" class="new" value="Add to cart" class="home-addtocart" name="addtocart" id="addtocart"></button></span><br> </div>
                   </form>
                      </div>
              
@@ -98,3 +98,18 @@ $servername = "localhost";
  ?>
  </div>
   </div>
+  <?php
+  if(isset($_POST["addtocart"])){
+    echo $_SESSION['products']->name;
+
+$quantity=$_POST['quantity'];
+   
+    $_SESSION['orders']->addItem($_SESSION['products']->name,$_SESSION['products']->price,$quantity,$_SESSION['products']->id);
+    
+  }
+  ?>
+
+<?php
+ ob_end_flush(); 
+ 
+?>
