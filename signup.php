@@ -1,3 +1,8 @@
+<?php 
+include 'classes.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +17,7 @@
 <body>
 
     <div class="main">
+       <a class="back"href="home.php"> <img src="/images/v10_163.png" alt="Logo" style="width:128px;height:128px; position: relative; bottom: 100px; left: 10px;"></a>
 
         <section class="signup">
             <div class="container">
@@ -33,14 +39,14 @@
                         </div>
                         <div class="form-group">
                             <input type="checkbox" checked="checked" name="agree-term" id="agree-term" class="agree-term" />
-                            <label for="agree-term" class="label-agree-term"><span><span></span></span>By signing up, you agree to all statements in  <a href="https://www.termsfeed.com/live/471266b5-2f7c-469c-93be-84f39705d98f" class="term-service">Terms of service</a></label>
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>By signing up, you agree to all statements in <a href="https://www.termsfeed.com/live/471266b5-2f7c-469c-93be-84f39705d98f" class="term-service">Terms of service</a></label>
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" action="home.php"/>
                         </div>
                     </form>
                     <p class="loginhere">
-                        Already have an account? <a href="http://localhost/signin.php" class="loginhere-link">Login here</a>
+                        Already have an account ? <a href="http://localhost/signin.php" class="loginhere-link">Login here</a>
 
                 </div>
             </div>
@@ -67,13 +73,7 @@
      });
    
     </script>
-  <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "stars";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+ <?php
 
 if(isset($_POST["submit"]))
 {
@@ -116,34 +116,29 @@ if(isset($_POST["submit"]))
   
   if(empty($_POST['email'])||empty($_POST['password'])||empty($_POST['username']))
   {
-   echo "<h2>*Missing fields</h2>";
+
+   echo "<h2  class='incorrect'>Missing fields</h2>";
   }
   else
   {
-    $sql= "SELECT * FROM accounts where email='".$_POST["email"]."'";
-
-    $result=mysqli_query($conn,$sql);
-    $num_rows = mysqli_num_rows($result);
-    if($num_rows >= 1)
-    {
-      echo "<h2>*Email already exists</h2>"; 
-    }
    
-    else if(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL))
+     if(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL))
     {
       if($invalid==true)
       {
+       
+      
+          $role=1;
+         $x=new client();
+         $result= $x->signup($_POST['username'],$_POST['email'],$_POST['password'],$_POST['phonenumber']);
         
-          
-        $sql="INSERT INTO accounts (username,email,password,phonenumber) values('".$_POST["username"]."','".$_POST["email"]."','".$_POST["password"]."','".$_POST["phonenumber"]."')";
-          $result=mysqli_query($conn,$sql);
-        header("location:home.php");
-    
-          
-      } 
+        }
+       
+       
+       
       else 
       {
-        echo "<h2>*Password should be atleast 8 chars in length & should contain atleast 1 uppercase letter , 1 number , and one special char </h2>";
+        echo "<h2  class='incorrect'>Password should be atleast 8 chars in length & should contain <br> atleast 1 uppercase letter , 1 number , and one special char</h2>";
       }
     }
     else
@@ -152,7 +147,7 @@ if(isset($_POST["submit"]))
     } 
   }
 }
-?>  
+?>
 <?php
 ob_end_flush();
 ?>
