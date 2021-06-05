@@ -1,152 +1,182 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet" />
-  <link href="./css/main.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <title>Shooping Cart</title>
-  <?php
-  include "top.php"
-  ?>
-</head>
 <style>
-  .layer{
-position: relative;
-width: 1050px;
-height: 1050px;
-left: 225px;
-top: 150px;
+        body{
+            overflow-x:hidden;
+            overflow-y:hidden;
+            background-color:rgba(191,113,84,0.1);
+        }
+        table,th,td,tr{
+            border:1px solid #e3d18a; 
+         }
+        th,td{
+            padding: 25px;
+            text-align: left;
+        }
+        th{
+            background-color: #bf7154;
+            color: white;
+        }
+        .counter{
+            color:#e3d18a;
+        }
+        .sub,.total{
+            color:#e3d18a;
+        }
 
-background: #FFF9F2;
-border-radius: 103px;
-z-index: 3;
-}
-.layer1{
-position: relative;
-width: 1191px;
-height: 500px;
-left: 150px;
-top: -750px;
+        table{
+            width: 38%;
+            position: relative;
+            left:130px;
+        }
+        .cart-total{
+            position: relative;
+            left:135px;
+        }
+        .checkout{
+            width:220px;
+            height:50px;
+            border:1px solid #e3d18a;
+            border-radius:15px;
+            background-color: #bf7154;
+            cursor: pointer;
+            position:relative;
+            left:200px;
+            margin-top:20px;
+        }
+        .checkout:hover{
+            background-color:rgba(191,113,84,0.8);
+            color:white; 
+        }
+        .checkouts{
+            width:220px;
+            height:50px;
+            border:1px solid #e3d18a;
+            border-radius:15px;
+            background-color: #bf7154;
+            cursor: pointer;
+            position:relative;
+            left:320px;
+            top: 20px;
+            margin-top:20px;
+        }
+        .checkouts:hover{
+            background-color:rgba(191,113,84,0.8);
+            color:white; 
+        }
+        .cart{
+            position: relative;
+            left:350px;
+        }
+        .cart-heading{
+            position: relative;
+            left:170px;
+            color:#433520;
+        }
+    </style>
 
-background: #BF7154;
-border-radius: 83px;
-z-index:2;
-}
+<?php
+ob_start();
+include 'classes.php'; 
+session_start();
+include "top.php";
 
-h1{
-
-text-align: center;
-width: 1024px;
-height: 121px;
-left: 208px;
-top: 434px;
-color:#BF7154;
-font-size: 96px;
-line-height: 91.2px;
-font-family:Rozha One;
-font-weight: 400;
-
-
-}
-.container1{
-position: absolute;
-width: 385.02px;
-height: 400px;
-left: 258px;
-top: 500px;
-
-background: #FFFFFF;
-border: 1px solid #BF7154;
-box-sizing: border-box;
-box-shadow: -2px 5px 6px rgba(0, 0, 0, 0.3);
-z-index: 3;
-
-}
-.container2{
-position: absolute;
-width: 385.02px;
-height: 400px;
-left: 850px;
-top: 500px;
-
-background: #FFFFFF;
-border: 1px solid #BF7154;
-box-sizing: border-box;
-box-shadow: -2px 5px 6px rgba(0, 0, 0, 0.3);
-z-index: 4;
-}
-input[type=submit] {
-  position: absolute;
-   background-color:#BF7154;
-  color: white;
-  width: 250px;
- height: 116px;
- left: 625px;
- top: 1150px;
-
-  border: none;
-  border-radius: 83px;;
-  cursor: pointer;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
- font-family: Rozha One;
-font-size: 35px;
-font-style: normal;
-font-weight: 400;
-line-height: 46px;
-letter-spacing: 0px;
-text-align: center;
-z-index: 5;
-}
-input[type=submit]:hover {
-  background-color: grey;
-}
-.layer3{
-  position: absolute;
-   background-color:#BF7154;
-  color: white;
-  width: 450px;
- height: 116px;
- left: 530px;
- top: 950px;
- border: none;
-  border-radius: 83px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
- font-family: Rozha One;
-font-size: 35px;
-font-style: normal;
-font-weight: 400;
-line-height: 46px;
-letter-spacing: 0px;
-text-align: center;
-z-index: 6;
+$counter=0;
+foreach($_SESSION['cart'] as $array){
+    $counter++;
 }
 
-</style>
-<body>
-  <div class="layer">
-    <h1>Shopping Cart</h1>
-</div>
+?>
+ <div class="cart">
+             <h1 class="cart-heading">You have <span class="counter"><?php echo $counter?></span> products in your cart</h1><br>
+                <table class="cart-items">
+                    <thead>
+                        <tr>
+                            <th>Product </th>
+                            <th>Price </th>
+                            <th>Quantity </th>    
+                            <th>Subtotal </th>
+                            <th>Select</th>
+                        
+                        </tr>
+                    </thead>
+                    <?php 
+                     $sum=0;
+                     $item=0;
+                     ?>
+                     <form action="" method="post">
+                     <?php
+                        foreach($_SESSION['cart'] as $array){
+                    ?>
+                <tr>
+                    <td><?php echo $array['Product']."<br />";?></td>
+                    <td><?php echo $array['Price']."<br />";?></td>
+                    <td><?php echo $array['Quantity']."<br />";?></td>
+                    <?php $total=$array['Price']*$array['Quantity'];
+                    ?>
+                    <td><?php echo $total; echo " EGP";
+                    $sum=$sum+$total;
+                    ?></td>
+                    <td><input type="checkbox" value="<?php echo $item; ?>" name="check[ ]"></td>
+                </tr>
+            <?php
+            $item++;
+        }
 
- <div class="layer1">
-   </div>
-   <div class="container1">
+  ?>
+ </table>
 
-    <img src=images/carmeny.png height="250" width="383px">
-  <p style="font-family:Rozha One" style="font-size:32">&nbsp;CarmenyKarine</p>
+ <input type="submit"  name="delete" class="checkouts" value="Remove item(s)">
+ </form><br>
+   <br>
+                <table class="cart-total"><br>
+                   <br>
+                   <form action="" method="post">
+                    <tr>
+                        <th>Total</th>
+                        <td class="total"><?php echo $sum; echo " EGP"?></td>
+                    </tr>
+                </table>
+            
+                <input type="submit"  name="submit" class="checkout" value="Check Out">
+                <input type="submit"  name="reset" class="checkout" value="Reset">
+                </form>
+            </div> 
+        </div>
+        </div>
+            </div>
+  </body>
+</html>
+<?php
 
-  <p style="font-family: Roboto"> &nbsp; 400EGP</p>
+if(isset($_POST["submit"])){
+  echo $_SESSION['client']->id;
+   $newest_id= $_SESSION['orders']->checkout($_SESSION['client']->id,$sum);
+   foreach($_SESSION['cart'] as $array){
+       $_SESSION['orders']->checkout2( $newest_id,$array['Product'],$array['Quantity'],$array['Price']);
+      
+   
+
+}
+
+   $_SESSION['cart']=array(); 
 
 
-    </div>
-   <div class="container2">
-    <img src=images/one.png height="250" width="383px">
-    <p style="font-family:Rozha One" >&nbsp;Calvin Klein One</p>
+}
+if(isset($_POST["delete"])){
+ 
+    
+ for ($i=0; $i<=count($_POST['check']);$i++) { 
+     $remove_id=$_POST['check']["$i"];
+     array_splice($_SESSION["cart"], $remove_id, 1);
 
-  <p style="font-family: Roboto"> &nbsp; 500EGP</p>
+ }
+ header("Location:cart.php");
+}
+if(isset($_POST["reset"])){
+ $_SESSION['cart']=array();
+ header("Location:cart.php");
+}
 
-
-   </div>
-<input type="submit" value="Check Out">
-<div class="layer3">
-  <p>Total:900EGP</p>
+?>
+<?php
+ob_end_flush();
+?>
