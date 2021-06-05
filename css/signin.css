@@ -109,14 +109,23 @@ h2 {
   color: white;
   font-family: 'Montserrat';
   font-size: 24px;
-  text-transform: uppercase;
   text-align: center;
-  margin-bottom: 40px; }
-
+  margin-bottom: 40px; 
   
+}
 
-.clear {
-  clear: both; }
+.incorrect{
+  border: 1px;
+  width:400px;
+  position:relative;
+  left:580px;
+  bottom:150px;
+  border-radius:5px;
+  color: #9F6000;
+  background-color: #FEEFB3;
+  opacity: 0.8;
+}
+
 
 
 body {
