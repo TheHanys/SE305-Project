@@ -1,5 +1,9 @@
+<?php
+include "classes.php";
+session_start();
+include 'top.php';?>
 <html>
-<link href="home.css" rel="stylesheet"/>    
+<link href="css/home1.css" rel="stylesheet"/>    
 <body>
     <div class="v23_34">
         <div class="v9_3">
@@ -28,16 +32,7 @@
     </div>
     <span class="v16_50">Our latest Products</span>
 </div>
-<div class="v16_48">
-   
-    <div class="v16_47">
-        <div class="v16_6"></div>
-        <div class="v16_7"></div>
-    </div>
-    <div class="v23_8">
-        <div class="name"></div>
-    </div>
-</div>
+
 <div class="v16_17">
     <div class="v16_32">
         <div class="v16_33"></div>
@@ -80,6 +75,6 @@
 </div>
 </body>
 </html>
-<?php include "header.php";?>
+
 
 <?php include "footer.php";?>
