@@ -3,6 +3,8 @@
 <link rel ="stylesheet" href="products.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .topnav{
 width:100%;
@@ -14,7 +16,7 @@ font-size: 10px;
 }
 .topnav a{
   color:grey;
-  padding-left: 60px;
+  padding-left: 40px;
   font-size: 20px;
 }
 .searchbar input[type="text"] { 
@@ -31,7 +33,7 @@ width:130px;
 border: none;
 }
 .searchbar{
-  padding-left: 500px;
+  padding-left: 250px;
 }
 .welcometxt{
   color:grey;
@@ -58,8 +60,9 @@ border: none;
  <?php }else if(!empty($_SESSION['client']) && $_SESSION['client']->role == 0) { 
              ?>
 <img id="logo" src ="images/v10_163.png">
-<a href= "addproduct.php"> Add Product </a>
-<a href= "viewusers.php"> View Users</a>
+<a href= "addproduct.php"> Add Products </a>
+<a href= "manageproducts.php"> Manage Products </a>
+<a href= "orders.php"> View Orders</a>
 <a href= "replies.php"> Complaints Reply</a>
 <a href= "signout.php"> Sign Out </a>
 <span class = welcometxt >Welcome <?php echo $_SESSION["client"]->username;?></span>
