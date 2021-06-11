@@ -18,6 +18,7 @@ font-size: 10px;
   color:grey;
   padding-left: 40px;
   font-size: 20px;
+  text-decoration:none;
 }
 .searchbar input[type="text"] { 
   float: top;
@@ -27,7 +28,7 @@ font-size: 10px;
   font-size: 20px;
   border-color: black;
 }
-img#logo{
+#logo{
 height:130px;
 width:130px;
 border: none;
@@ -40,13 +41,17 @@ border: none;
   font-size: 20px;
   padding-left: 20px
 }
+
 </style>
 <body>
 <form action=" ">
 <div class ="topnav">
-<?php if(!empty($_SESSION['client']) && $_SESSION['client']->role == 1) { 
-             ?>
+<a href="home.php">
 <img id="logo" src ="images/v10_163.png">
+</a>
+<?php if(!empty($_SESSION['client']) && $_SESSION['client']->role == 1) { 
+             ?>             
+
 <a href= "home.php"> Home </a>
 <a href= "products.php"> Shop</a>
 <a href= "contactus.php"> Contact us </a>
@@ -59,7 +64,7 @@ border: none;
 </span>
  <?php }else if(!empty($_SESSION['client']) && $_SESSION['client']->role == 0) { 
              ?>
-<img id="logo" src ="images/v10_163.png">
+
 <a href= "addproduct.php"> Add Products </a>
 <a href= "manageproducts.php"> Manage Products </a>
 <a href= "orders.php"> View Orders</a>
@@ -71,7 +76,6 @@ border: none;
        <button type="submit"><i class="fa fa-search"></i></button>
  </span>
  <?php }else{?>
-  <img id="logo" src ="images/v10_163.png">
 <a href= "home.php"> Home </a>
 <a href= "products.php"> Shop</a>
 <a href= "contactus.php"> Contact us </a>

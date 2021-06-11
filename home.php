@@ -15,7 +15,7 @@ include 'top.php';?>
                 </div>
         </div>
     </div>    
-    <a class="shopnow" href="products.php">SHOP NOW </a>
+    <a class="shopnow" href="products.php">SHOP NOW</a>
 
 <div class="v10_23">
     <div class="v10_27"></div>
@@ -39,21 +39,18 @@ include 'top.php';?>
         <div class="v16_34"></div>
         <div class="v16_35"><img src="images/v16_35.png"width=748 height=668></div>
         <div class="v16_40">
-            <div class="v16_39"></div>
+            <div class="v16_39"><a href="products.php?filter=bags"></div>
             <span class="v10_67">Bags</span>
         </div>
     </div>
     <div class="v16_41">
         <div class="v16_23">
             <div class="v16_24"></div>
-            <div class="v16_25"></div>
-            <div class="v16_26"></div>
-            <div class="v16_27"></div>
-            <div class="v16_28"><img src="images/v16_28.png"width=348 height=340></div>
+            <div class="v16_25"><img src="images/v16_28.png"width=348 height=340></div>
         </div>
             <div class="v23_33">
-                <div class="v16_42"></div>
-                <span class="v16_43">Wallets</span>
+                <div class="v16_42"><a href="products.php?filter=wallets"></div>
+                <span class="v16_43">Wallets</span></a>
             </div>
         </div>
         <div class="v16_44">
@@ -61,8 +58,8 @@ include 'top.php';?>
                 <div class="v16_19"></div>
                 <div class="v16_20"><img src="images/v16_22.png"width=348 height=340>   </div>
             </div>
-            <div class="v16_45"></div>
-            <span class="v16_46">Sun Glasses</span>
+            <div class="v16_45"><a href="products.php?filter=accesories"></div>
+            <span class="v16_46">Sun Glasses</span></a>
         </div>
         <span class="v16_49">Browse</span>
     </div>
