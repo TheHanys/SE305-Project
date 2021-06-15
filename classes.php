@@ -1,4 +1,5 @@
 <?php
+$_SESSION['cart']=array();
 
 class user
 {
@@ -50,7 +51,12 @@ class client extends user
 
 }
 
-
+function makeComplaint($usermail,$message,$id){
+  $conn=$this->create_connection();
+  $sql="INSERT INTO contactus (useremail,message,userid) values ('$usermail','$message','$id')";
+  $result = mysqli_query($conn,$sql);
+  return $result;
+}
   
 }
 
@@ -67,26 +73,35 @@ class admin extends user
     }
 
 
-   function insertproduct($name,$price,$image)
-   {
-    $this->create_connection();
-    $sql="INSERT into products (name,price,image) values('$this->name','$this->price','$this->image')";
-    $result=mysqli_query($this->conn,$sql);
-    $this->close_connection();
-    return mysqli_insert_id($this->conn);
-   }
+    function insertproduct($name,$category,$price,$image)
+    {
+     $this->create_connection();
+     $sql="INSERT into products (name,category,price,image) values('$name','$category','$price','$image')";
+     $result=mysqli_query($this->conn,$sql);
+     return mysqli_insert_id($this->conn);
+    }
+ 
 
-    function deleteproduct($name)
+    function deleteproduct($id)
     {
       $this->create_connection();
-      $sql = "DELETE FROM products WHERE name = $name ";
+      $sql = "DELETE FROM products where id = $id";
       $result = mysqli_query($this->conn,$sql);
+      return $result;
+      if($result)	
+      {
+          header("Location:manageproducts.php");
+      }
+      else{
+        echo $sql;
+      }
     }
 
-    function editproducts($name)
+    function editproducts($name,$category,$price,$image)
     {
       $this->create_connection();
-      $sql = "UPDATE FROM products WHERE name = $name values('$this->name','$this->price','$this->image')";
+      $sql = "UPDATE `products` SET `name` = '$name',`category` = '$category', `price` = '$price', `image` = '$image' WHERE
+       id='".$_GET['X']."'";
       $result = mysqli_query($this->conn,$sql);
     }
 
@@ -127,6 +142,15 @@ class products
     return $result;
 
   }
+  function viewcategory($cat)
+  {
+    
+    $conn=$this->create_connection();
+    $sql="SELECT * from products where category = '$cat'";
+    $result = mysqli_query($conn,$sql);  
+    return $result;
+
+  }
     
 }
 
@@ -160,8 +184,6 @@ function addItem($name,$price,$quantity,$id)
 
     array_push($_SESSION['cart'],array("Product"=>$name,"Price"=>$price,"Quantity"=>$quantity,"ID"=>$id));
     header("Location:cart.php");
-
-
 
 }
 
