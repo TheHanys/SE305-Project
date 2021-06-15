@@ -63,9 +63,11 @@ session_start();
 
 if(isset($_POST["submit"]))
 { 
-     $_SESSION['client']=new client();
+    $_SESSION['client']=new client();
     $result=$_SESSION['client']->signin($_POST['phonenumber'],$_POST['password']); 
-    if($row=mysqli_fetch_array($result))    
+    $hash= 
+    $verify = password_verify($_POST['password'], $hash);
+    if($row=mysqli_fetch_array($result)&&verify)    
     {
         
         $_SESSION['client']->id=$row[0];
