@@ -25,18 +25,25 @@ session_start();
                     <form method="POST" id="signup-form" class="signup-form" action="">
                         <h2 id="create" class="form-title">Create account</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="username" id="username" placeholder="Your Username"/>
+                            <input type="text" class="form-input" name="username" id="username" placeholder="Username"/>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Email"/>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
-                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
                         <div class="form-group">
-                            <input type="phone number" class="form-input" name="phonenumber" id="phonenumber" placeholder="Your Phone Number"/>
+                            <input type="phone number" class="form-input" name="phonenumber" id="phonenumber" placeholder="Phone Number"/>
                         </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="address" id="address" placeholder="Address"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="city" id="city" placeholder="City"/>
+
+                        </div>
+
                         <div class="form-group">
                             <input type="checkbox" checked="checked" name="agree-term" id="agree-term" class="agree-term" />
                             <label for="agree-term" class="label-agree-term"><span><span></span></span>By signing up, you agree to all statements in <a href="https://www.termsfeed.com/live/471266b5-2f7c-469c-93be-84f39705d98f" class="term-service">Terms of service</a></label>
@@ -114,11 +121,17 @@ if(isset($_POST["submit"]))
     }
   }
   
-  if(empty($_POST['email'])||empty($_POST['password'])||empty($_POST['username']))
+  if(empty($_POST['email'])||empty($_POST['password'])||empty($_POST['username'])||empty($_POST['address'])||empty($_POST['city']))
   {
 
    echo "<h2  class='incorrect'>Missing fields</h2>";
   }
+  if((strlen($_POST['phonenumber']))<11 && (!empty($_POST['phonenumber'])))
+  {
+
+   echo "<h2  class='incorrect'>Phone number is not in the correct format</h2>";
+  }
+
   else
   {
    
@@ -130,7 +143,8 @@ if(isset($_POST["submit"]))
       
           $role=1;
          $x=new client();
-         $result= $x->signup($_POST['username'],$_POST['email'],$_POST['password'],$_POST['phonenumber']);
+         $hash=password_hash($_Post['password'], PASSWORD_DEFAULT);
+         $result= $x->signup($_POST['username'],$_POST['email'],$hash,$_POST['phonenumber'],$_POST['address'],$_POST['city']);
         
         }
        
@@ -138,12 +152,12 @@ if(isset($_POST["submit"]))
        
       else 
       {
-        echo "<h2  class='incorrect'>Password should be atleast 8 chars in length & should contain <br> atleast 1 uppercase letter , 1 number , and one special char</h2>";
+        echo "<h2  class='incorrect'>Password should be atleast 8 chars in length & should contain <br> atleast 1 uppercase letter , 1 number , and one special character.</h2>";
       }
     }
     else
     {
-      echo "<h2>*Email isn't in the correct format</h2>";
+      echo "<h2  class='incorrect'>Email isn't in the correct format.</h2>";
     } 
   }
 }
