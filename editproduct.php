@@ -2,6 +2,7 @@
 include 'classes.php';
 session_start();
 $_SESSION['admin'] = new admin();
+include "top.php";
 ?>
 
 <!DOCTYPE html>
@@ -13,12 +14,9 @@ $_SESSION['admin'] = new admin();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <title>Sign Up</title>
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="css/editproduct.css">
 </head>
 <body>
-<a href="home.php">
-<img id="logo" src ="images/v10_163.png" style="width:128px;height:128px; position: relative; bottom: 100px; left: 10px;">
-</a>
     <div class="main">
       
 
@@ -26,7 +24,7 @@ $_SESSION['admin'] = new admin();
             <div class="container">
                 <div class="signup-content">
                     <form method="POST" id="signup-form" class="signup-form"enctype="multipart/form-data">
-                        <h2 id="create" class="form-title">Add a product</h2>
+                        <h2 id="create" class="form-title">Edit product</h2>
                         <div class="form-group">
                             <input type="text" class="form-input" name="pname" id="username" placeholder="Product name"/>
                         </div>
@@ -49,7 +47,7 @@ $_SESSION['admin'] = new admin();
                            <h3> Choose an image </h3>
  <input type="file" class=" inputfile btn w-100 py-3" id="img" name="img" accept="image/*" >                        </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Add product" action="home.php"/>
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Edit product" action="home.php"/>
                         </div>
                     </form>
                     <p class="loginhere">
@@ -69,10 +67,17 @@ $_SESSION['admin'] = new admin();
 
 if(isset($_POST["submit"]))
 {
+    if(empty($_POST['pname']) || empty($_POST['category']) || empty($_POST['price']))
+    {
+       echo "<h2  class='incorrect'>Missing fields</h2>";
+       
+    }
+    else{
   $image=$_FILES['img']['name'];
- move_uploaded_file($_FILES["img"]["tmp_name"], "C:\\\\xampp\htdocs\stars\images\\" . $image);
+ move_uploaded_file($_FILES["img"]["tmp_name"], "C:\\\\xampp\htdocs\stars\images" . $image);
  $x = new admin();
      $result= $x->editproducts($_POST['pname'],$_POST['category'],$_POST['price'],$image);
+ }
 }
 ?>
 </body>

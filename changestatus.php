@@ -11,10 +11,10 @@ $_SESSION['admin'] = new admin();
 $id=$_GET['X'];
 
 $x = new admin();
-$result= $x->deleteproduct($id);
+$result= $x->changestatus($id);
 if($result) 
       {
-          header("Location:manageproducts.php");
+          header("Location:orders.php");
       }
       else{
         echo $sql;

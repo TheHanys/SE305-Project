@@ -43,6 +43,14 @@ session_start();
                             <input type="text" class="form-input" name="city" id="city" placeholder="City"/>
 
                         </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="question" id="question" placeholder="Security Question"/>
+
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="answer" id="answer" placeholder="Answer"/>
+
+                        </div>
 
                         <div class="form-group">
                             <input type="checkbox" checked="checked" name="agree-term" id="agree-term" class="agree-term" />
@@ -143,8 +151,10 @@ if(isset($_POST["submit"]))
       
           $role=1;
          $x=new client();
-         $hash=password_hash($_Post['password'], PASSWORD_DEFAULT);
-         $result= $x->signup($_POST['username'],$_POST['email'],$hash,$_POST['phonenumber'],$_POST['address'],$_POST['city']);
+         $hash=password_hash($_POST['password'], PASSWORD_DEFAULT);
+         $result= $x->signup($_POST['username'],$_POST['email'],$hash,$_POST['phonenumber'],$_POST['address'],$_POST['city'],$_POST['question'],$_POST['answer']);
+
+         
         
         }
        

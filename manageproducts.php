@@ -3,16 +3,17 @@ include "classes.php";
 session_start();
 include 'top.php';?>
 <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 table,th,td,tr{
-  border:1px solid black;
+  border:1px solid #e3d18a;
 }
 th,td{
   padding: 15px;
   text-align: left;
 }
 th{
-  background-color: grey;
+  background-color: #bf7154;
   color: white;
 }
 table{
@@ -65,8 +66,8 @@ h5{
     <tr>
       <th>Product Name</th>
       <th>Price</th> 
-      <th>Image</th>
       <th>Category</th>
+      <th>Image</th>
       <th>Edit</th>
        <th>Delete</th>
     </tr>
@@ -74,40 +75,32 @@ h5{
 </body>               
 
 <form action="addproduct.php">
-    <input type="submit" class="submit button btn w-100 py-3" value="Add a new product" /><br>
 </form><br>
-<h3><input type = 'text' name = 'search' id='search' placeholder="By product name" onkeyup='validate()'></h3>
+<h3><input type = 'text' name = 'search' id='search2' placeholder="By product name" onkeyup='validate()'></h3>
 <h3>Products</h3>
 <div id ='msg'></div>
 
    
 <?php
   
-       $servername = "localhost";
-       $username = "root";
-       $password = "";
-       $dbname = "stars";
-              
-       // Create connection
-       $conn = mysqli_connect($servername,$username,$password,$dbname);
-       $sql="SELECT * from products";
-       $result = mysqli_query($conn,$sql);	
+       $_SESSION['products']=new products();
+$result =$_SESSION['products']->viewproducts(); 
   
-	while($row=mysqli_fetch_array($result))	
-	{
-              $ID=$row[0];
-              $Name=$row[1];
-              $Price=$row[2];
-              $Image=$row[3];              
-              $Category=$row[4];            
+  while($row=mysqli_fetch_array($result)) 
+  {
+         $_SESSION['products']->id=$row[0];
+        $_SESSION['products']->name=$row[1];
+           $_SESSION['products']->price=$row[2];
+            $_SESSION['products']->image=$row[3];              
+              $_SESSION['products']->category=$row[4];            
               echo"<tr>";
-              echo" <td>$Name</td>";
-              echo" <td>$Price</td>";
-              echo" <td>$Category</td>";
+              echo" <td> " . $_SESSION['products']->name .  "</td>";
+              echo " <td> " . $_SESSION['products']->price . "</td>";
+              echo" <td>" . $_SESSION['products']->category . "</td>";
               
               
               ?>
-             <td> <img src="<?php echo $Image;?>" width=50px> </td>
+             <td> <img src="<?php echo ($_SESSION['products']->image) ;?>" width=50px> </td>
               
              <td><span><a class="actions"href = "editproduct.php?X=<?php echo $row[0]; ?>">Edit</a></span></td>            
               <td><span><a class="actions"href = "deleteproduct.php?X=<?php echo $row[0]; ?>">Delete</a></span></td>
@@ -133,7 +126,7 @@ Table.innerHTML = "";
     jQuery.ajax(
 {
     url: 'manageproductsajax.php',
-    data:'search='+$("#search").val() ,
+    data:'search2='+$("#search2").val() ,
     type: "POST",
     success:function(data){
 $("#msg").html(data);
