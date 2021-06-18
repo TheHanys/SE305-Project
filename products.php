@@ -1,6 +1,6 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <?php include "top.php";?>
+  <?php include "top.php"; ?>
 
 <style>
 	.topnav{
