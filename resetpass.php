@@ -1,6 +1,11 @@
 <?php 
 include 'classes.php';
 session_start();
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "stars";
+$conn = new mysqli($servername, $username, $password, $dbname);
 ?>
 
 <!DOCTYPE html>
@@ -27,20 +32,17 @@ session_start();
                 <div class="signup-content">
                     <form method="POST" id="signup-form" class="signup-form">
                         
-                        <h2 class="form-title"style="color:white">Sign in</h2>
+                        <h2 class="form-title"style="color:white">Reset password</h2>
                         <div class="form-group">
-                            <input type="phone number" class="form-input" name="phonenumber" id="phonenumber" placeholder="Your Phone Number"/>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email Address"/>
                         </div>
+                       
                         <div class="form-group">
-                            <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
-                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign in"/>
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Submit"/>
                         </div>
                     </form>
                     <p class="loginhere"style="color:white">
-                        Forget Password? <a href="resetpass.php" class="loginhere-link"style="color:white">Click here</a>
+                         ..
                     </p>
                 </div>
             </div>
@@ -62,33 +64,32 @@ session_start();
    
     </script>
     <?php
-
+$check=false;
 if(isset($_POST["submit"]))
 { 
-     $_SESSION['client']=new client();
-/*    $result2 = $_SESSION['client']->verify($_POST['password'],$_POST['phonenumber']);*/
-      $hash2 = $_SESSION['client']->verify2($_POST['phonenumber']);
-      echo $hash2;
-    $result=$_SESSION['client']->signin($_POST['phonenumber'],$hash2); 
-     $verify= (password_verify($_POST['password'],$hash2));
-    if ( ($row=mysqli_fetch_array($result)) || ($verify) )    
-    { 
-        $_SESSION['client']->id=$row[0];
-        $_SESSION['client']->username=$row[1];
-        $_SESSION['client']->email=$row[2];
-        $_SESSION['client']->password=$row[3];
-        $_SESSION['client']->phonenumber=$row[4];
-        $_SESSION['client']->role=$row[5];
-        $_SESSION['client']->address=$row[6];
-        $_SESSION['cart']=array();
-        header("location:home.php");
-    }
-    else    
+ $sql="SELECT * from accounts where email='".$_POST["email"]."'"; 
+    $result = mysqli_query($conn,$sql); 
+    if($row=mysqli_fetch_array($result))    
     {
-        echo "<h2  class='incorrect'>Incorrect Phone number or Password.</h2>";
-    }
+        $check=true;
+      
+       
+        
+         ?>
+                                
+                       
+              
+                            <?php 
+                              
+                            }
+                            else echo "<h2 class = 'incorrect'>*Incorrect E-mail</h2>";
 
 }
+if($check==true){
+
+                            header('Location: forgot.php?X='.$_POST["email"]);
+                        }
+
 ?>
 
 <?php

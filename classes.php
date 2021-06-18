@@ -1,13 +1,15 @@
 <?php
-$_SESSION['cart']=array();
 
+$_SESSION['cart']=array();
 class user
 {
-  public $username ;
-  public $password;
-  public $email;
-  public $phonenumber;
-  public $role;
+  private $id;
+  private $username ;
+  private $password;
+  private $email;
+  private $phonenumber;
+  private $role;
+  private $address;
   public $conn;
 
   function create_connection()
@@ -23,12 +25,37 @@ class client extends user
   function signin($phonenumber,$password)
     {
       $this->create_connection();
+   /*   $sql1="SELECT password from accounts where phonenumber='$phonenumber'";
+      $result1=mysqli_query($this->conn,$sql1);
+     $row = mysqli_fetch_array(mysqli_fetch_assoc($result1));
+      $hash = $row['password'];    
+      password_verify($password, $hash);*/
       $sql="SELECT * from accounts where phonenumber='$phonenumber'and password='$password'";
       $result=mysqli_query($this->conn,$sql);
+  
       return $result;
     }
+    function verify($password,$phonenumber)
+    {
+        $this->create_connection();
+      $sql1="SELECT password from accounts where phonenumber='$phonenumber'";
+      $result1 = mysqli_query($this->conn,$sql1);
+     $row = $result1->fetch_assoc();
+      $hash = $row['password'];    
+     password_verify($password, $hash);
+      return $result1;
+    }
+    function verify2($phonenumber)
+    {
+      $this->create_connection($phonenumber);
+       $sql="SELECT password from accounts where phonenumber='$phonenumber'";
+      $result=mysqli_query($this->conn,$sql);
+      $row = $result->fetch_assoc();
+      $hash=$row['password'];
+      return $hash;
+    }
 
-    function signup($username,$email,$password,$phonenumber)
+    function signup($username,$email,$password,$phonenumber,$address,$city,$question,$answer)
 {
 
     $conn=$this->create_connection();
@@ -43,20 +70,21 @@ class client extends user
     {
    
     $role=1;
-    $sql="INSERT INTO accounts (username,email,password,phonenumber,role) values('$username','$email','$password','$phonenumber' ,'$role')";
+    $sql="INSERT INTO accounts (username,email,password,phonenumber,role,address,city,sQuestion,sAnswer) values('$username','$email','$password','$phonenumber' ,'$role','$address','$city','$question','$answer')";
     $result = mysqli_query($conn,$sql);  
-    header("location:home.php");
     return $result;
     }
 
+
+}
+function myOrders($id)
+{
+  $this->create_connection();
+  $sql="SELECT * from orders WHERE CID='$id'";
+      $result=mysqli_query($this->conn,$sql);
+      return $result;
 }
 
-function makeComplaint($usermail,$message,$id){
-  $conn=$this->create_connection();
-  $sql="INSERT INTO contactus (useremail,message,userid) values ('$usermail','$message','$id')";
-  $result = mysqli_query($conn,$sql);
-  return $result;
-}
   
 }
 
@@ -73,22 +101,21 @@ class admin extends user
     }
 
 
-    function insertproduct($name,$category,$price,$image)
-    {
-     $this->create_connection();
-     $sql="INSERT into products (name,category,price,image) values('$name','$category','$price','$image')";
-     $result=mysqli_query($this->conn,$sql);
-     return mysqli_insert_id($this->conn);
-    }
- 
+   function insertproduct($name,$category,$price,$image)
+   {
+    $this->create_connection();
+    $sql="INSERT into products (name,category,price,image) values('$name','$category','$price','$image')";
+    $result=mysqli_query($this->conn,$sql);
+    return mysqli_insert_id($this->conn);
+   }
 
-    function deleteproduct($id)
+      function deleteproduct($id)
     {
       $this->create_connection();
       $sql = "DELETE FROM products where id = $id";
       $result = mysqli_query($this->conn,$sql);
       return $result;
-      if($result)	
+      if($result) 
       {
           header("Location:manageproducts.php");
       }
@@ -114,8 +141,21 @@ class admin extends user
      $this->close_connection();
      return $result;
    }
+   function changestatus($id)
+   {
+$this->create_connection();
+$status = "Shipped";
+ $sql = "UPDATE `orders` SET `status` = '$status' WHERE id='$id'";
+ $result=mysqli_query($this->conn,$sql);;
+return $result;
+   }
 
- 
+ function changelatestproducts(){
+    $conn=$this->create_connection();
+    $sql = "SELECT * FROM products ORDER BY ID DESC";
+    $result = mysqli_query($conn,$sql);
+    return $result;
+  }
 
 
 }
@@ -123,9 +163,11 @@ class admin extends user
 
 class products
 {
+  public $id;
   public $name;
   public $price;
   public $image;
+  public $category;
   public $conn;
   function create_connection()
   {
@@ -151,7 +193,13 @@ class products
     return $result;
 
   }
-    
+    function searchAjax($key)
+    {
+      $conn=$this->create_connection();
+      $sql="SELECT * FROM products where Name LIKE '%". $key ."%'"; 
+      $result = mysqli_query($conn,$sql);
+      return $result;
+    }
 }
 
 class orders
@@ -161,10 +209,11 @@ class orders
       $this->conn = new mysqli("localhost", "root", "", "stars");
       return $this->conn;
   }
-    function checkout($CID,$total)
+    function checkout($CID,$total,$number)
 {
     $conn=$this->create_connection();
-    $sql="INSERT INTO orders (CID,Total) values ('$CID','$total')";
+    $status = "Pending";
+    $sql="INSERT INTO orders (CID,Total,Number,Status,date) values ('$CID','$total','$number','$status',now())";
     $result = mysqli_query($conn,$sql); 
     $newest_id = mysqli_insert_id($conn);
     return $newest_id;
@@ -184,6 +233,8 @@ function addItem($name,$price,$quantity,$id)
 
     array_push($_SESSION['cart'],array("Product"=>$name,"Price"=>$price,"Quantity"=>$quantity,"ID"=>$id));
     header("Location:cart.php");
+
+
 
 }
 

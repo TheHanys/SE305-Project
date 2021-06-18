@@ -13,19 +13,27 @@ th,td{
   text-align: left;
 }
 th{
+  height:40px;
   background-color: #BF7154;
   color: white;
+  text-align-last: center;
 }
 table{
-  width: 50%;
+  width: 80%;
   position:relative;
-  left:400px;
+  left:140px;
   top:10px;
+}
+td{
+  text-align-last: center;
 }
 h3{
   left:400px;
 position:relative;
 
+}
+.actions{
+  color:green;
 }
 
 </style>
@@ -42,7 +50,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 ?>
 <h3> Search for an order : </h3>
-<h3><input type = 'text' name = 'search2' id='search2' placeholder="By order ID" onkeyup='validate()'></h3>
+<h3><input type = 'text' name = 'search2' id='search2' placeholder="By order ID or Phone Number" onkeyup='validate()'></h3>
 
 <h3>This tables shows all the records found in database:</h3>
 <div id ='msg'></div>
@@ -75,11 +83,13 @@ $("#msg").html(data);
   <table id="mytable">
     <tr>
       <th>Order ID</th>
-      <th>Email</th>
+      <th>Number</th>
       <th>Product</th>
       <th>Quantity</th>
       <th>Price</th>
       <th>Amount</th>
+      <th> Status </th>
+      <th> Change status </th>
     </tr>
 </body> 
 
@@ -95,7 +105,8 @@ while($row=mysqli_fetch_array($result))
 {
   echo"<tr>";
   echo" <td>$row[0]</td>";
-  echo" <td>$row[1]</td>";
+  echo" <td>$row[3]</td>";
+
   $id=$row[0];
   $sql="SELECT Product from orderedproducts WHERE OID='$id'";
   $result2 = mysqli_query($conn,$sql);  
@@ -131,7 +142,9 @@ echo "<td>";
   } 
   echo "</td>";
   echo"<td>$row[2]</td>";
-  ?>
+    echo" <td>$row[4]</td>";
+?>
+ <td><span><a class="actions"href = "changestatus.php?X=<?php echo $row[0]; ?>">Set as shipped</a></span></td>
 
  <?php 
   echo"</tr>";
