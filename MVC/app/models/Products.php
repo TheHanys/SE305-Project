@@ -1,4 +1,4 @@
- <?php
+<?php
 class prodcuts extends Model{
     public $id;
     public $name;
